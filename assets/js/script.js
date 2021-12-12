@@ -38,8 +38,6 @@ var taskFormHandler = function(event) {
 
 var createTaskEl = function (taskDataObj) {
 
-    console.log(taskDataObj);
-    console.log(taskDataObj.status);
     //create list item
     var listItemEl = document.createElement("li");
     listItemEl.className = "task-item";
@@ -56,6 +54,7 @@ var createTaskEl = function (taskDataObj) {
     var taskActionsEl = createTaskActions(taskIdCounter);
     listItemEl.appendChild(taskActionsEl);
 
+    tasksToDoEl.append(listItemEl);
     switch (taskDataObj.status) {
         case "to do":
             taskActionsEl.querySelector("select[name='status-change']").selectedIndex = 0;
@@ -69,8 +68,6 @@ var createTaskEl = function (taskDataObj) {
             taskActionsEl.querySelector("select[name='status-change']").selectedIndex = 2;
             tasksCompleteEl.append(listItemEl);
             break;
-        default:
-            console.log("Someting went wrong")
     }
 
     taskDataObj.id =taskIdCounter;
@@ -242,7 +239,6 @@ var loadTasks = function() {
     if (!savedTasks) {
         return false;
     }
-    console.log("Saved tasks found!");
 
     savedTasks = JSON.parse(savedTasks);
 
